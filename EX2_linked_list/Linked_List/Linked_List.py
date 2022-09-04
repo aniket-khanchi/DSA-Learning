@@ -116,8 +116,77 @@ class LinkedList:
 
             prev.next = cur_node.next
             cur_node = None
-
     
+    def length(self):
+        curr_node = self.head
+        count = 0
+        while curr_node:
+            count+=1
+            curr_node = curr_node.next
+        return count
+
+    def len_recursive(self, node): #recursive method to find length of linked list
+        if node is None:
+            return 0
+        return 1 + self.len_recursive(node.next)
+
+    def node_swap(self,n1,n2):
+        prev_node = None
+        curr_node = self.head
+        while curr_node:
+            if curr_node.data == n1:
+                n1_curr_node = curr_node
+                n1_prev_node = prev_node
+            if curr_node.data == n2:
+                n2_curr_node = curr_node
+                n2_prev_node = prev_node
+                break
+            prev_node = curr_node
+            curr_node = curr_node.next
+        n1_prev_node.next.data,n2_prev_node.next.data =  n2_curr_node.data,n1_curr_node.data
+        # n2_prev_node.next = n1_curr_node
+    
+    def swap_nodes(self, key_1, key_2): # Another way to Swap Nodes
+
+        if key_1 == key_2:
+            return 
+
+        prev_1 = None 
+        curr_1 = self.head 
+        while curr_1 and curr_1.data != key_1:
+            prev_1 = curr_1 
+            curr_1 = curr_1.next
+
+        prev_2 = None 
+        curr_2 = self.head 
+        while curr_2 and curr_2.data != key_2:
+            prev_2 = curr_2 
+            curr_2 = curr_2.next
+
+        if not curr_1 or not curr_2:
+            return 
+
+        if prev_1:
+            prev_1.next = curr_2
+        else:
+            self.head = curr_2
+
+        if prev_2:
+            prev_2.next = curr_1
+        else:
+            self.head = curr_1
+
+        curr_1.next, curr_2.next = curr_2.next, curr_1.next
+    
+    def reverse_iterative(self):
+        prev = None 
+        cur = self.head
+        while cur:
+            nxt = cur.next
+            cur.next = prev
+            prev = cur 
+            cur = nxt 
+        self.head = prev
 
 
 # if "__name__" == "__main__":
@@ -127,9 +196,13 @@ llist.append("4")
 llist.append("5")
 llist.append("6")
 llist.insert_after(2,9)
-llist.del_at_index(4)
+# llist.node_swap("4","5")
+# llist.swap_nodes("4","5")
+# llist.del_at_index(4)
+# print(llist.len_recursive(llist.head))
 # llist.del_value("6")
 # llist.index(-4)
-llist.printl()
+llist.reverse_iterative()
+llist.printl() # orignal llist 3 4 9 5 6
 
 
