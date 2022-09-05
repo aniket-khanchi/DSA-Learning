@@ -182,11 +182,46 @@ class LinkedList:
         prev = None 
         cur = self.head
         while cur:
+            nxt = cur.next   #storing the next element
+            cur.next = prev  #reversing the pointer --making curr next element previous one
+            prev = cur       #moving the prev to curret node
+            cur = nxt        #moving the curr node to next
+        self.head = prev
+
+    def reverse_recursive(self):
+
+        def _reverse_recursive(cur, prev):
+            if not cur:
+                return prev
+
             nxt = cur.next
             cur.next = prev
             prev = cur 
             cur = nxt 
-        self.head = prev
+            return _reverse_recursive(cur, prev)
+
+        self.head = _reverse_recursive(cur=self.head, prev=None) 
+
+    #Merge Two Sorted Linked Lists
+    def merge(self,ll1,ll2):
+        p = ll1.self.head
+        s = None
+        q = ll2.self.head
+        while p or q :
+            if p.data > q.data:
+                s = q
+                q = q.next
+                
+            elif p.data< q.data:
+                s = p
+                p = p.next
+            else:
+                pass
+        
+
+        
+
+        
 
 
 # if "__name__" == "__main__":
@@ -202,7 +237,7 @@ llist.insert_after(2,9)
 # print(llist.len_recursive(llist.head))
 # llist.del_value("6")
 # llist.index(-4)
-llist.reverse_iterative()
+llist.reverse_recursive()
 llist.printl() # orignal llist 3 4 9 5 6
 
 
