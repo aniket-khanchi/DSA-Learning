@@ -1,3 +1,6 @@
+from itertools import count
+
+
 class Node:
   def __init__(self, data):
     self.data = data
@@ -203,21 +206,70 @@ class LinkedList:
         self.head = _reverse_recursive(cur=self.head, prev=None) 
 
     #Merge Two Sorted Linked Lists
-    def merge(self,ll1,ll2):
-        p = ll1.self.head
+    def merge(self,ll2):
+        p = self.head
         s = None
-        q = ll2.self.head
-        while p or q :
-            if p.data > q.data:
+        q = ll2.head
+        count = 0
+        while p and q :
+            if p.data >= q.data:
+                s.next = q
                 s = q
-                q = q.next
-                
-            elif p.data< q.data:
-                s = p
-                p = p.next
+                q = s.next          
             else:
-                pass
+                if count >1: 
+                    s.next = p
+                s = p
+                p = s.next
+            if count == 0:
+                merge_llist_head = s
+            count +=1
+        if not p:
+            s.next = q 
+        if not q:
+            s.next = p
+        self.head = merge_llist_head
         
+        
+          
+    
+    
+    
+    def merge_sorted(self, llist):  # A simple Vanilla way to merge sorted list
+        p = self.head 
+        q = llist.head
+        s = None
+
+        if not p:
+            return q
+        if not q:
+            return p
+
+        if p and q:
+            if p.data <= q.data:
+                s = p 
+                p = s.next
+            else:
+                s = q
+                q = s.next
+            new_head = s 
+        while p and q:
+            if p.data <= q.data:
+                s.next = p 
+                s = p 
+                p = s.next
+            else:
+                s.next = q
+                s = q
+                q = s.next
+        if not p:
+            s.next = q 
+        if not q:
+            s.next = p
+
+        self.head = new_head     
+        return self.head
+                
 
         
 
@@ -225,19 +277,26 @@ class LinkedList:
 
 
 # if "__name__" == "__main__":
-llist = LinkedList()
-llist.append("3")
-llist.append("4")
-llist.append("5")
-llist.append("6")
-llist.insert_after(2,9)
+llist_1 = LinkedList()
+llist_2 = LinkedList()
+llist_1.append(1)
+llist_1.append(5)
+llist_1.append(7)
+llist_1.append(9)
+llist_1.append(10)
 # llist.node_swap("4","5")
 # llist.swap_nodes("4","5")
 # llist.del_at_index(4)
 # print(llist.len_recursive(llist.head))
 # llist.del_value("6")
 # llist.index(-4)
-llist.reverse_recursive()
-llist.printl() # orignal llist 3 4 9 5 6
+llist_2.append(2)
+llist_2.append(3)
+llist_2.append(4)
+llist_2.append(6)
+llist_2.append(8)
+llist_1.merge(llist_2)
+# llist_1.reverse_recursive()
+llist_1.printl() # orignal llist 3 4 9 5 6
 
 
