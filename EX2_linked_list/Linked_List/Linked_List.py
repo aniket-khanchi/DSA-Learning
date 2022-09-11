@@ -1,4 +1,6 @@
 from itertools import count
+from locale import currency
+from os import curdir
 
 
 class Node:
@@ -269,6 +271,20 @@ class LinkedList:
 
         self.head = new_head     
         return self.head
+
+    def remove_duplicates(self):
+        dup_values = {}
+        cur_node = self.head
+        prev_node = None
+        while cur_node:
+            if cur_node.data in dup_values:
+                prev_node.next = cur_node.next
+                cur_node = None
+            else:
+                dup_values[cur_node.data] = 1
+                prev_node = cur_node
+            cur_node = prev_node.next
+
                 
 
         
@@ -292,11 +308,12 @@ llist_1.append(10)
 # llist.index(-4)
 llist_2.append(2)
 llist_2.append(3)
-llist_2.append(4)
+llist_2.append(5)
 llist_2.append(6)
 llist_2.append(8)
 llist_1.merge(llist_2)
 # llist_1.reverse_recursive()
+llist_1.remove_duplicates()
 llist_1.printl() # orignal llist 3 4 9 5 6
 
 
