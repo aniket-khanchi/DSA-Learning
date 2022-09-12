@@ -387,6 +387,10 @@ class LinkedList:
             q.next = self.head 
             self.head = p.next 
             p.next = None
+    
+    def is_palindrome():
+        pass
+
 
         
 
