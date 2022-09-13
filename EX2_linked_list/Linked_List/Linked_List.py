@@ -421,6 +421,106 @@ class LinkedList:
                     p = p.next
                     q = q.next
                 return True
+    
+    def move_tail_to_head(self):
+        p = self.head
+        head = self.head
+        switch = 0
+        while p:
+            tail = p
+            if switch == 0:
+                if p.next.next == None:
+                    tail_prev = p
+                    switch = 1
+            p = p.next
+        
+        tail.next = head
+        self.head = tail
+        tail_prev.next = None
+
+    def move_tail_to_head_improved(self):
+        p = self.head
+        head = self.head
+        switch = 0
+        while p.next:
+            tail = p.next
+            tail_prev = p 
+            p = p.next
+        tail.next = head
+        self.head = tail
+        tail_prev.next = None
+    
+    def move_tail_to_head_2(self): 
+        if self.head and self.head.next:
+            last = self.head 
+            second_to_last = None
+            while last.next:
+                second_to_last = last
+                last = last.next
+            last.next = self.head 
+            second_to_last.next = None 
+            self.head = last
+        
+    def sum_two_lists(self, llist):
+        p = self.head
+        q = llist.head
+        num1 = ''
+        num2 = ''
+
+        while p:
+            num1+=str(p.data)
+            p = p.next
+        
+        while q:
+            num2+=str(q.data)
+            q = q.next
+        
+        num = int(num1) + int(num2)
+
+        result_ll = LinkedList()
+        for i in range(len(str(num))):
+            result_ll.append(str(num)[i])
+        
+        return result_ll
+    
+    def sum_two_lists(self, llist): #with less time complexity
+        p = self.head  
+        q = llist.head
+
+        sum_llist = LinkedList()
+
+        carry = 0
+        while p or q:
+            if not p:
+                i = 0
+            else:
+                i = p.data
+            if not q:
+                j = 0 
+            else:
+                j = q.data
+            s = i + j + carry
+            if s >= 10:
+                carry = 1
+                remainder = s % 10
+                sum_llist.append(remainder)
+            else:
+                carry = 0
+                sum_llist.append(s)
+            if p:
+                p = p.next
+            if q:
+                q = q.next
+        return sum_llist
+        
+
+        
+
+
+            
+            
+
+
 
 
 # if "__name__" == "__main__":
@@ -429,7 +529,7 @@ llist_2 = LinkedList()
 llist_1.append(1)
 llist_1.append(5)
 llist_1.append(7)
-llist_1.append(5)
+llist_1.append(4)
 llist_1.append(0)
 # llist.node_swap("4","5")
 # llist.swap_nodes("4","5")
@@ -437,18 +537,20 @@ llist_1.append(0)
 # print(llist.len_recursive(llist.head))
 # llist.del_value("6")
 # llist.index(-4)
-# llist_2.append(2)
-# llist_2.append(3)
-# llist_2.append(5)
-# llist_2.append(5)
-# llist_2.append(5)
+llist_2.append(2)
+llist_2.append(3)
+llist_2.append(5)
+llist_2.append(5)
+llist_2.append(5)
 # llist_1.merge(llist_2)
 # print(llist_1.reverse_recursive())
 # llist_1.remove_duplicates()
 # print(llist_1.print_nth_from_last(5))
 # print(llist_1.count_occurence_recursive(llist_1.head,5))
 # llist_1.rotate(7)
-print(llist_1.is_palindrome(3))
-llist_1.printl() # orignal llist 3 4 9 5 6
+# print(llist_1.is_palindrome(3))
+# llist_1.move_tail_to_head_improved()
+llist_1.sum_two_lists(llist_2).printl()
+# llist_1.printl() # orignal llist 3 4 9 5 6
 
 
