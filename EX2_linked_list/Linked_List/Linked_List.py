@@ -388,22 +388,39 @@ class LinkedList:
             self.head = p.next 
             p.next = None
     
-    def is_palindrome():
-        pass
-
-
+    def is_palindrome(self,mtd): 
+        if mtd ==1:  #using a string
+            s = ''
+            p = self.head
+            while p:
+                s += p.data
+                p = p.next
+            return s == s[::-1]
+        if mtd ==2:  #using a stack
+            p = self.head
+            s = []
+            while p:
+                s.append(p)
+                p = p.next
+            p = self.head
+            while p:
+                data = s.pop()
+                if p.data != data:
+                    return False
+                p = p.next
+            return True
         
-
-
-
-    
-
-            
-       
-
-        
-
-        
+        if mtd == 3: #using two pointers
+            if self.head:
+                p = self.head
+                self.reverse_iterative()
+                q = self.head
+                while p:
+                    if p.data != q.data:
+                        return False
+                    p = p.next
+                    q = q.next
+                return True
 
 
 # if "__name__" == "__main__":
@@ -412,25 +429,26 @@ llist_2 = LinkedList()
 llist_1.append(1)
 llist_1.append(5)
 llist_1.append(7)
-llist_1.append(9)
-llist_1.append(10)
+llist_1.append(5)
+llist_1.append(0)
 # llist.node_swap("4","5")
 # llist.swap_nodes("4","5")
 # llist.del_at_index(4)
 # print(llist.len_recursive(llist.head))
 # llist.del_value("6")
 # llist.index(-4)
-llist_2.append(2)
-llist_2.append(3)
-llist_2.append(5)
-llist_2.append(5)
-llist_2.append(5)
-llist_1.merge(llist_2)
-# llist_1.reverse_recursive()
+# llist_2.append(2)
+# llist_2.append(3)
+# llist_2.append(5)
+# llist_2.append(5)
+# llist_2.append(5)
+# llist_1.merge(llist_2)
+# print(llist_1.reverse_recursive())
 # llist_1.remove_duplicates()
 # print(llist_1.print_nth_from_last(5))
-print(llist_1.count_occurence_recursive(llist_1.head,5))
-llist_1.rotate(7)
+# print(llist_1.count_occurence_recursive(llist_1.head,5))
+# llist_1.rotate(7)
+print(llist_1.is_palindrome(3))
 llist_1.printl() # orignal llist 3 4 9 5 6
 
 
