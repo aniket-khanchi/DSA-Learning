@@ -18,7 +18,7 @@ class CicularLinkedList:
             while cur:
                 tail = cur
                 cur = cur.next
-                if cur.next == head:
+                if cur == head:
                     break
             tail.next = new_node
             new_node.next = head
@@ -61,8 +61,8 @@ class CicularLinkedList:
             while cur:
                 if cur.data == data:
                     prev.next = cur.next    
-                cur = cur.next
                 prev = cur
+                cur = cur.next
                 if cur == self.head:
                     break 
                 
@@ -77,5 +77,5 @@ cl1.append(2)
 cl1.append(7)
 cl1.append(4)
 cl1.prepend('head')
-cl1.remove_node(2)
+cl1.remove_node(4)
 cl1.print_list()
