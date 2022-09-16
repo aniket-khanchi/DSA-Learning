@@ -1,3 +1,7 @@
+from itertools import count
+from multiprocessing import set_forkserver_preload
+
+
 class Node:
     def __init__(self,data):
         self.data = data
@@ -86,6 +90,58 @@ class CicularLinkedList:
                 if cur.data == key:
                     prev.next = cur.next 
                     cur = cur.next
+    def __len__(self):
+        cur = self.head
+        count = 0
+        while cur:
+            count += 1
+            cur = cur.next
+            if cur == self.head:
+                break
+        return count
+    
+    def split_list(self):
+        size = len(self)
+
+        if size == 0:
+            return None
+        if size ==1:
+            return self.head
+        
+        mid = size//2
+
+        count = 0
+        cur = self.head
+        head = self.head
+
+        cllist_2 = CicularLinkedList()
+        while cur.next != self.head:
+            if count < mid:
+                end_1st = cur
+            if mid<= count < size:
+                cllist_2.append(cur.data)
+                # end_2nd = cur
+            count+=1
+            cur = cur.next
+        end_1st.next = head
+        return cllist_2.print_list()
+
+
+        
+
+        
+
+
+        
+    
+        
+            
+
+            
+
+
+
+
                 
 
 
@@ -98,5 +154,6 @@ cl1.append(2)
 cl1.append(7)
 cl1.append(4)
 cl1.prepend('head')
-cl1.remove_node(4)
+cl1.split_list()
+# cl1.remove_node(4)
 cl1.print_list()
