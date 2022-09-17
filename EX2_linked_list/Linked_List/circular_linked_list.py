@@ -115,7 +115,7 @@ class CicularLinkedList:
         head = self.head
 
         cllist_2 = CicularLinkedList()
-        while cur.next != self.head:
+        while count < size:
             if count < mid:
                 end_1st = cur
             if mid<= count < size:
@@ -124,7 +124,37 @@ class CicularLinkedList:
             count+=1
             cur = cur.next
         end_1st.next = head
-        return cllist_2.print_list()
+        return cllist_2.print_list(),print('\n'), self.print_list()
+
+    def split_list(self):
+        size = len(self)    
+
+        if size == 0:
+            return None
+        if size == 1:
+            return self.head
+
+        mid = size//2
+        count = 0
+
+        prev = None
+        cur = self.head
+
+        while cur and count < mid:
+            count += 1
+            prev = cur
+            cur = cur.next
+        prev.next = self.head 
+
+        split_cllist = CicularLinkedList()
+        while cur.next != self.head:
+            split_cllist.append(cur.data)
+            cur = cur.next
+        split_cllist.append(cur.data)
+
+        self.print_list()
+        print("\n")
+        split_cllist.print_list()
 
 
         
@@ -153,7 +183,8 @@ cl1.append(9)
 cl1.append(2)
 cl1.append(7)
 cl1.append(4)
+cl1.append(10)
 cl1.prepend('head')
 cl1.split_list()
 # cl1.remove_node(4)
-cl1.print_list()
+# cl1.print_list()
