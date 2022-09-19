@@ -23,4 +23,4 @@ def printDivisors(n) :
 print ("The divisors of 100 are: ")
 printDivisors(100)
  
-#This code is contributed by Nikita Tiwari.
+#editing a comment
