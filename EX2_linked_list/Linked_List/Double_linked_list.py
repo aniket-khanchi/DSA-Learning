@@ -40,6 +40,18 @@ class DoublyLinkedList:
         while cur:
             print(str(cur.data) + ' <----> ',end='')
             cur = cur.next
+    
+    def add_node_before(self,data):
+        cur = self.head
+        prev = None
+        next = None
+        while cur:
+            if cur.data == data:
+                
+                
+        
+        pass
+
 
 dll1 = DoublyLinkedList()
 dll1.append(2)
