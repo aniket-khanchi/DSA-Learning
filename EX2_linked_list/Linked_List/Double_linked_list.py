@@ -1,6 +1,9 @@
 #adding
 
 
+from hashlib import new
+
+
 class Node:
     def __init__(self, data):
         self.data = data
@@ -41,16 +44,24 @@ class DoublyLinkedList:
             print(str(cur.data) + ' <----> ',end='')
             cur = cur.next
     
-    def add_node_before(self,data):
+    def add_node_before(self,index,data):
         cur = self.head
-        prev = None
-        next = None
+        previous = None
+        #next = None
+        node_index = 0
         while cur:
-            if cur.data == data:
+            if node_index == index:
+               new_data = Node(data)
+               previous.next = new_data
+               new_data.prev = previous
+               new_data.next = cur
+               cur.prev = new_data 
+            previous = cur
+            cur = cur.next
+            
+            node_index += 1
                 
                 
-        
-        pass
 
 
 dll1 = DoublyLinkedList()
@@ -60,6 +71,7 @@ dll1.append(5)
 dll1.append(7)
 dll1.append(8)
 dll1.prepend(0)
+dll1.add_node_before(2,50)
 
 dll1.print_list()
 
