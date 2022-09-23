@@ -62,6 +62,22 @@ class DoublyLinkedList:
             node_index += 1
 
     #add node before by using data point
+
+    def add_node_before_via_key(self,key,data):
+        cur = self.head
+        previous = None
+        while cur:
+            if cur.data == key:
+               new_data = Node(data)
+               previous.next = new_data
+               new_data.prev = previous
+               new_data.next = cur
+               cur.prev = new_data 
+            previous = cur
+            cur = cur.next
+    
+            
+            
                 
                 
 
@@ -73,7 +89,7 @@ dll1.append(5)
 dll1.append(7)
 dll1.append(8)
 dll1.prepend(0)
-dll1.add_node_before(2,50)
+dll1.add_node_before_via_key(8,50)
 
 dll1.print_list()
 
