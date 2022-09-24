@@ -76,6 +76,8 @@ class DoublyLinkedList:
             previous = cur
             cur = cur.next
     
+    def add_node_after(self,index,data):
+        pass
             
             
                 
