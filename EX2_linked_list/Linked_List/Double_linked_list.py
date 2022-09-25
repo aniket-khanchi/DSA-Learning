@@ -133,6 +133,36 @@ class DoublyLinkedList:
                 new_node.prev = prev
                 return 
             cur = cur.next
+
+    #delete a Node
+
+    def del_node(self,data):
+        cur = self.head
+        while cur:
+            if cur.data == data:
+                # deleting the only node present
+                if not cur.next and cur ==self.head:
+                    cur = None
+                    self.head = None
+                    return
+                # deleting the head node
+                elif cur.data == self.head.data:
+                    self.head = cur.next
+                    cur = None
+                    return
+                #Deleting node other than head where cur.next is None
+                elif cur.next == None:
+                    prv =cur.prev
+                    prv.next = None
+                    cur = None
+                    return
+                #Deleting node other than head where cur.next is not None
+                else:
+                    nxt = cur.next
+                    prv = cur.prev
+                    prv.next = nxt
+                    nxt.prev = prv      
+            cur = cur.next    
             
             
                 
@@ -146,8 +176,8 @@ dll1.append(5)
 dll1.append(7)
 dll1.append(8)
 dll1.prepend(0)
-dll1.add_node_after(5,50)
-
+# dll1.add_node_after(5,50)
+dll1.del_node(8)
 dll1.print_list()
 
 
