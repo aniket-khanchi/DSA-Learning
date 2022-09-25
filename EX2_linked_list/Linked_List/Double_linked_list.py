@@ -1,6 +1,7 @@
 #adding
 
 
+from enum import unique
 from hashlib import new
 
 
@@ -161,8 +162,70 @@ class DoublyLinkedList:
                     nxt = cur.next
                     prv = cur.prev
                     prv.next = nxt
-                    nxt.prev = prv      
-            cur = cur.next    
+                    nxt.prev = prv    
+                    return  
+            cur = cur.next   
+
+    # def reverse(self):
+    #     cur = self.head
+    #     while cur:
+    #         if cur.data == self.head.data:
+    #             cur.prev = cur.next
+    #             cur.next = None
+
+    #         cur.prev,cur.next = cur.next,cur.prev
+    #         if cur.prev == None:
+
+    #         cur = cur.prev
+    def reverse(self):
+        tmp = None
+        cur = self.head
+        while cur:
+            tmp = cur.prev
+            cur.prev = cur.next
+            cur.next = tmp
+            cur = cur.prev
+        if tmp:
+            self.head = tmp.prev
+
+    def remove_duplicates(self):
+        cur = self.head 
+        seen = dict()
+        while cur:
+            if cur.data not in seen:
+                seen[cur.data] = 1
+                cur = cur.next
+            else:
+                nxt = cur.next
+                self.del_node(cur.data)
+                cur = nxt
+
+    # def pair_with_sums(self,sum):
+    #     cur = self.head
+    #     while cur:
+    #         nxt = cur.next
+    #         while nxt:
+    #             if cur.data + nxt.data == sum:
+    #                 print(cur.data,nxt.data)
+    #             nxt = nxt.next
+    #         cur = cur.next
+    
+    def pairs_with_sum(self, sum_val):
+        pairs = list()
+        p = self.head 
+        q = None 
+        while p:
+            q = p.next
+            while q:
+                if p.data + q.data == sum_val:
+                    pairs.append("(" + str(p.data) + "," + str(q.data) + ")")
+                q = q.next
+            p = p.next
+        return pairs
+
+
+
+
             
             
                 
@@ -175,9 +238,15 @@ dll1.append(4)
 dll1.append(5)
 dll1.append(7)
 dll1.append(8)
+dll1.append(5)
+dll1.append(7)
+dll1.append(8)
 dll1.prepend(0)
 # dll1.add_node_after(5,50)
-dll1.del_node(8)
+# dll1.del_node(8)
+# dll1.reverse()
+dll1.remove_duplicates()
+print(dll1.pairs_with_sum(7))
 dll1.print_list()
 
 
