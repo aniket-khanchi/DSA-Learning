@@ -149,6 +149,10 @@ class BinaryTree(object):
 
         return traversal
 
+    def height(self):
+        
+        pass
+
 
 
 tree = BinaryTree(1)
