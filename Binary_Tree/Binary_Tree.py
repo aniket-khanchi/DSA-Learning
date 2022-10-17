@@ -1,3 +1,6 @@
+from turtle import left, right
+
+
 class Stack(object):
     def __init__(self):
         self.items = []
@@ -149,16 +152,34 @@ class BinaryTree(object):
 
         return traversal
 
-    def height(self):
+    def height(self,node):
+        if node is None:
+            return -1
+        left_height = self.height(node.left)
+        right_height = self.height(node.right)
         
-        pass
+        return 1 + max(left_height,right_height)
+
+
+    def size_(self, node):
+        if node is None:
+            return 0
+
+        left_size =  self.size_(node.left)
+        right_size = self.size_(node.right)
+
+        return  1+ left_size + right_size
 
 
 
 tree = BinaryTree(1)
 tree.root.left = Node(2)
 tree.root.right = Node(3)
+tree.root.right.right = Node(7)
 tree.root.left.left = Node(4)
 tree.root.left.right = Node(5)
+tree.root.left.left.left = Node(0)
 
-print(tree.print_tree("reverse_levelorder"))
+print(tree.height(tree.root))
+
+print(tree.print_tree("preorder"))
