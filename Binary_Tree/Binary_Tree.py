@@ -170,6 +170,22 @@ class BinaryTree(object):
 
         return  1+ left_size + right_size
 
+    def size(self):
+        if self.root is None:
+            return 0
+
+        stack = Stack()
+        stack.push(self.root)
+        size = 1
+        while stack:
+            node = stack.pop()
+            if node.left:
+                size += 1
+                stack.push(node.left)
+            if node.right:
+                size += 1
+                stack.push(node.right)
+        return size
 
 
 tree = BinaryTree(1)
