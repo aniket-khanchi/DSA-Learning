@@ -25,6 +25,18 @@ def count_bits(n):
         n >>= 1
     return count
 
-x = count_bits(10)
-print(x)
+# x = count_bits(10)
+# print(x)
+
+
+#check parity if no of 1 is odds then 1 else 0
+def parity(x):             #x and x-1 equals x with its lowest set it erased.
+    result = 0
+    while x:
+        result ^= 1
+        x &= x-1
+    return result
+
+q = parity(11)  # 1011
+print(q)
 
